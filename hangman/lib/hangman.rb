@@ -17,7 +17,7 @@ class Hangman
   def get_word
     dictionary_arr = @dictionary.split("\r\n")
     words_in_range = dictionary_arr.select {|word| word.length.between?(5, 12)}
-    return words_in_range.sample
+    return words_in_range.sample.downcase
   end
 
   def generate_guess(word)
@@ -58,7 +58,7 @@ class Hangman
     guess = ""
     loop do
       print "Guess: "
-      guess = gets.chomp
+      guess = gets.chomp.downcase
       if guess.length == 1
         break
       end
