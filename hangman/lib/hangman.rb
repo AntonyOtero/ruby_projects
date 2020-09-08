@@ -1,3 +1,12 @@
+=begin
+  
+# TODO
+- fix how number of attempts remaining is tracked
+- add dynamic graphics
+- allow for guessing the whole word, all-or-nothing
+  
+=end
+
 class Hangman
   attr_reader :selected_word
   attr_reader :graphics
@@ -29,7 +38,7 @@ class Hangman
   end
 
   def update_display(guess)
-    if @attempts != 1 then
+    if @attempts > 0 then
       # GUESS DISPLAY
       if @selected_word.include? guess then
         selected_arr = @selected_word.split("")
@@ -47,9 +56,6 @@ class Hangman
       end
       
       play
-    elsif @attempts == 1
-      system("clear")
-      puts "YOU LOSE!"
     end
   end
 
@@ -68,8 +74,14 @@ class Hangman
   end
   
   def play
+    if @attempts == 0 then
+      system("clear")
+      puts @graphics
+      return  "\nYOU LOSE! The word was \"#{@selected_word}\"\n"
+    end
     print @letters_display
-    puts "{Attempts left: #{@attempts}, Word: #{@selected_word}}"
+    # puts "DEBUG :: Attempts left: #{@attempts} :: DEBUG"
+    puts "DEBUG :: Attempts left: #{@attempts} | Word: #{@selected_word} :: DEBUG"
     puts @graphics
     print @guess_display
     print make_guess
