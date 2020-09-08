@@ -1,11 +1,13 @@
 =begin
   
 # TODO
-- fix how number of attempts remaining is tracked
-- add dynamic graphics
+~ add dynamic graphics
++ Fix | guess display not displaying correctly guessed letter
 - allow for guessing the whole word, all-or-nothing
   
 =end
+
+require 'fileutils'
 
 class Hangman
   attr_reader :selected_word
@@ -14,9 +16,14 @@ class Hangman
   attr_reader :letters_display
   attr_reader :guess_display
   
+  
   def initialize
-    @dictionary = File.read("5desk.txt")
-    @graphics = File.read("graphics.txt")
+    FileUtils.mkdir "local/"
+    FileUtils.mkdir "local/saves"
+    FileUtils.copy "graphics.txt", "local/graphics_inst.txt"
+
+    @dictionary = "5desk.txt"
+    @graphics = "local/graphics_inst.txt"
     @selected_word = get_word
     @letters_display = "\na b c d e f g h i j k l m n o p q r s t u v w x y z\n\n"
     @guess_display = generate_guess(@selected_word)
@@ -24,7 +31,7 @@ class Hangman
   end
 
   def get_word
-    dictionary_arr = @dictionary.split("\r\n")
+    dictionary_arr = File.read(@dictionary).split("\r\n")
     words_in_range = dictionary_arr.select {|word| word.length.between?(5, 12)}
     return words_in_range.sample.downcase
   end
@@ -41,7 +48,7 @@ class Hangman
     if @attempts > 0 then
       # GUESS DISPLAY
       if @selected_word.include? guess then
-        selected_arr = @selected_word.split("")
+        selected_arr = @selected_word.split("\n")
         selected_arr.each_with_index do |letter, index|
           if letter == guess then
             @guess_display[(index * 2) + 1] = guess
@@ -49,6 +56,21 @@ class Hangman
         end
       else
         @attempts -= 1
+        # GRAPHICS DISPLAY
+        case @attempts
+        when 5
+          File.write(@graphics, ["____ ", "|  | ", "|  O ", "|    ", "|    "].join("\n"))
+        when 4
+          File.write(@graphics, ["____ ", "|  | ", "|  O ", "|  | ", "|    "].join("\n"))
+        when 3
+          File.write(@graphics, ["____ ", "|  | ", "|  O ", "| /| ", "|    "].join("\n"))
+        when 2
+          File.write(@graphics, ["____ ", "|  | ", "|  O ", "| /|\\", "|    "].join("\n"))
+        when 1
+          File.write(@graphics, ["____ ", "|  | ", "|  O ", "| /|\\", "| /  "].join("\n"))
+        when 0
+          File.write(@graphics, ["____ ", "|  | ", "|  O ", "| /|\\", "| / \\"].join("\n"))
+        end
       end
       # LETTERS DISPLAY
       if @letters_display.include? guess then
@@ -60,10 +82,9 @@ class Hangman
   end
 
   def make_guess
-    # Does guess equal selected word?
     guess = ""
     loop do
-      print "Guess: "
+      print "Guess a letter: "
       guess = gets.chomp.downcase
       if guess.length == 1
         break
@@ -76,13 +97,12 @@ class Hangman
   def play
     if @attempts == 0 then
       system("clear")
-      puts @graphics
+      puts File.read(@graphics)
       return  "\nYOU LOSE! The word was \"#{@selected_word}\"\n"
     end
     print @letters_display
-    # puts "DEBUG :: Attempts left: #{@attempts} :: DEBUG"
     puts "DEBUG :: Attempts left: #{@attempts} | Word: #{@selected_word} :: DEBUG"
-    puts @graphics
+    puts File.read(@graphics)
     print @guess_display
     print make_guess
   end
