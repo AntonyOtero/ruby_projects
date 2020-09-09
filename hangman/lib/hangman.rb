@@ -1,7 +1,6 @@
 =begin
   
 # TODO
-- Fix | guess display not displaying correctly guessed letter
 - Add | allowance for guessing the whole word, all-or-nothing
   
 =end
