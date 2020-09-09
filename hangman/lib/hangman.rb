@@ -1,7 +1,7 @@
 =begin
   
 # TODO
-- Add | allowance for guessing the whole word, all-or-nothing
+~ Add | allowance for guessing the whole word, all-or-nothing
   
 =end
 
@@ -101,11 +101,19 @@ class Hangman
     loop do
       print "Guess a letter: "
       guess = gets.chomp.downcase
-      if guess.length == 1 or guess == ":save"
+      if guess.length == 1 or guess == ":save" or guess.length == @selected_word.length
         break
       end
     end
-    (guess == ":save") ? save : update_ui(guess)
+    if guess == ":save" then
+      save
+    elsif guess == @selected_word then
+      system("clear")
+      puts "YOU WON! You've guessed the word \"#{@selected_word}\""
+    else
+      update_ui(guess)
+    end
+    # (guess == ":save") ? save : update_ui(guess)
   end
   
   def get_graphics
