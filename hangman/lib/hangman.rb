@@ -133,7 +133,11 @@ class Hangman
       system("clear")
       puts get_graphics
       puts"GAME OVER! The word was \"#{@selected_word}\""
+    elsif @guess_ui.slice(1, @guess_ui.length - 3).split(" ").join("") == @selected_word then
+      system("clear")
+      puts "YOU WON! You've guessed the word \"#{@selected_word}\""
     else
+      system("clear")
       display_ui
     end
   end
