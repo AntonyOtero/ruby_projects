@@ -1,7 +1,6 @@
 =begin
   
 # TODO
-- Fix | guess display not displaying correctly guessed letter
 - Add | allowance for guessing the whole word, all-or-nothing
   
 =end
@@ -107,6 +106,7 @@ class Hangman
   end
 
   def display_ui
+    system('clear')
     # DEBUG
     puts "Atempts left: #{@attempts} | Word: #{@selected_word}"
     # DEBUG
