@@ -9,11 +9,11 @@
 require 'fileutils'
 
 class Hangman
-  attr_reader :selected_word
-  attr_reader :graphics
-  attr_reader :attempts
-  attr_reader :letters_display
-  attr_reader :guess_display
+  # attr_reader :selected_word
+  # attr_reader :graphics
+  # attr_reader :attempts
+  # attr_reader :letters_display
+  # attr_reader :guess_display
   
   
   def initialize
@@ -46,7 +46,7 @@ class Hangman
 
   def update_guess_ui(guess)
     if @selected_word.include? guess then
-      selected_arr = @selected_word.split("\n")
+      selected_arr = @selected_word.split("")
       selected_arr.each_with_index do |letter, index|
         if letter == guess then
           @guess_ui[(index * 2) + 1] = guess
@@ -107,7 +107,6 @@ class Hangman
   end
 
   def display_ui
-    print @letters_ui
     # DEBUG
     puts "Atempts left: #{@attempts} | Word: #{@selected_word}"
     # DEBUG
