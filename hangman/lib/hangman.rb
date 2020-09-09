@@ -41,12 +41,6 @@ class Hangman
     @attempts = attempts
   end
   
-  attr_reader :selected_word
-  attr_reader :graphics
-  attr_reader :attempts
-  attr_reader :letters_display
-  attr_reader :guess_display
-  
   def save
     FileUtils.touch "local/saves/saved.txt"
     json = JSON.dump({"selected_word" => @selected_word, "letters_ui" => @letters_ui, "guess_ui" => @guess_ui, "attempts" => @attempts})
@@ -120,7 +114,7 @@ class Hangman
 
   def display_ui
     # DEBUG
-    puts "Atempts left: #{@attempts} | Word: #{@selected_word}"
+    # puts "Atempts left: #{@attempts} | Word: #{@selected_word}"
     # DEBUG
     print @letters_ui
     puts get_graphics

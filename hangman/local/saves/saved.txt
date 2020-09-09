@@ -1,1 +1,1 @@
-{"selected_word":"mister","letters_ui":"\n- b - d e f g h i j k l m n o p q r - t u v w x y -\n\n","guess_ui":"\n_ _ s _ _ _\n\n","attempts":3}
+{"selected_word":"sweepstake","letters_ui":"\n- b c d - f g - - j k - m - o p q r - - - v w x y z\n\n","guess_ui":"\ns _ e e _ s t a _ e\n\n","attempts":1}
