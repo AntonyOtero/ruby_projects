@@ -1,1 +1,1 @@
-# odin-ruby-projects
+# Ruby Projects from The Odin Project
