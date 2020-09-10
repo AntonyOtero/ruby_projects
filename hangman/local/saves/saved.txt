@@ -1,1 +1,0 @@
-{"selected_word":"tangshan","letters_ui":"\n- b - d e f g h i j k l m n o p q r s t u - w - y z\n\n","guess_ui":"\n_ a _ _ _ _ a _\n\n","attempts":2}
