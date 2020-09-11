@@ -1,2 +1,2 @@
 language = "ruby"
-run = "ruby recursion/modules/merge_sort.rb"
+run = "ruby linked_lists/linked_list.rb"
