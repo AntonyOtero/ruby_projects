@@ -1,2 +1,2 @@
 language = "ruby"
-run = "ruby linked_lists/linked_list.rb"
+run = "ruby connect_four/lib/connect_four.rb"

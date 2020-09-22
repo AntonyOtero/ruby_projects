@@ -24,7 +24,7 @@ def get_number
 end
 
 def caesar_cipher(string, number)
-  puts string.bytes.map { |ascii|
+  return string.bytes.map { |ascii|
          if ascii.between?(65, 90)
            if ascii + number > 90
              ascii = 64 + ((ascii + number) % 90)
@@ -45,4 +45,4 @@ def caesar_cipher(string, number)
        }.join
 end
 
-caesar_cipher(get_string, get_number)
+puts caesar_cipher(get_string, get_number)
